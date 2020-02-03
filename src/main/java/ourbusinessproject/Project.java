@@ -10,6 +10,8 @@ public class Project {
     @NotBlank
     private String title;
 
+    @NotNull
+    @NotBlank
     private String description;
 
 
