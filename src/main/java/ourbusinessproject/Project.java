@@ -2,9 +2,18 @@ package ourbusinessproject;
 
 import com.sun.istack.NotNull;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+@Entity
 public class Project {
+
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @NotNull
     @NotBlank
@@ -14,6 +23,9 @@ public class Project {
     @NotBlank
     private String description;
 
+    public Long getId() {
+        return id;
+    }
 
     public void setTitle(String title) {
         this.title = title;

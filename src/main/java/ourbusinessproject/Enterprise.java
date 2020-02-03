@@ -2,16 +2,23 @@ package ourbusinessproject;
 
 import com.sun.istack.NotNull;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Enterprise {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @NotNull
     @NotBlank
     private String name;
-
 
     @NotBlank
     @NotNull
@@ -26,6 +33,10 @@ public class Enterprise {
     @NotBlank
     @Email
     private String contactEmail;
+
+    public Long getId() {
+        return id;
+    }
 
     public void setName(String name) {
         this.name = name;
