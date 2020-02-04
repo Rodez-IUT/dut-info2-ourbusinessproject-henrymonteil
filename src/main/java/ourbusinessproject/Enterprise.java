@@ -38,6 +38,22 @@ public class Enterprise {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
