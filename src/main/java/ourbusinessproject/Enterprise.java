@@ -1,12 +1,11 @@
 package ourbusinessproject;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,57 +15,59 @@ public class Enterprise {
     @GeneratedValue
     private Long id;
 
-    @NotNull
-    @NotBlank
+    @NotEmpty
     private String name;
-
-    @NotBlank
-    @NotNull
     @Size(min = 10)
     private String description;
-
-    @NotNull
-    @NotBlank
+    @NotEmpty
     private String contactName;
-
-    @NotNull
-    @NotBlank
-    @Email
+    @NotEmpty @Email
     private String contactEmail;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToMany
+    private Project projects;
 
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getContactName() {
+        return contactName;
     }
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
     }
 
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Project getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Project projects) {
+        this.projects = projects;
     }
 }
