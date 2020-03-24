@@ -1,50 +1,49 @@
 package ourbusinessproject;
 
-import com.sun.istack.NotNull;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Project {
 
-
     @Id
-    @GeneratedValue
-    private Long id;
-
-
-
-    @NotNull
-    @NotBlank
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @NotEmpty
     private String title;
-
-    @NotNull
-    @NotBlank
     private String description;
+    @ManyToOne @NotNull
+    private Enterprise enterprise;
 
-    public Long getId() {
-        return id;
+    public Project() {
     }
 
+    public Project(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setTitle(String title)
-    {
-        this.title = title;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
+    public Long getId() {
+        return id;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 }
