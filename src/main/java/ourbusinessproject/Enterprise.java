@@ -1,12 +1,17 @@
 package ourbusinessproject;
+
 import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class Enterprise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -18,42 +23,53 @@ public class Enterprise {
     private String contactName;
     @NotEmpty @Email
     private String contactEmail;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL) @NotNull
     private List<Project> projects;
 
     public Enterprise(){
         this.projects = new ArrayList<>();
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getContactName() {
         return contactName;
     }
+
     public void setContactName(String contactName) {
         this.contactName = contactName;
     }
+
     public String getContactEmail() {
         return contactEmail;
     }
+
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
     public Long getId() {
         return id;
     }
+
     public List<Project> getProjects() {
-        return projects;
+        return projects.isEmpty() ? null : projects;
     }
+
     public void addProject(Project aAdd){
         this.projects.add(aAdd);
     }
