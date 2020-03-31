@@ -30,6 +30,11 @@ public class InitializationService {
         initAndSaveProject1E2();
         initAndSaveProject2E1();
 
+        /*
+         * @Transactional
+         * Si le projet est invalide, rien n'est ajouté
+         * une transaction doit être ACID, tout ou rien n'est ajouté.
+         */
     }
 
     private void initAndSaveProject1E1() {
