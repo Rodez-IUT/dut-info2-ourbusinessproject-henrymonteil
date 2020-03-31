@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Service
@@ -20,23 +21,28 @@ public class EnterpriseProjectService {
         this.entityManager = entityManager;
     }
 
-    public void save(Object object) {
-        entityManager.persist(object);
+    public void save(Project project) {
+        entityManager.persist(project.getEnterprise());
+        entityManager.persist(project);
         entityManager.flush();
     }
 
-    public Project findProjectById(Long id) {
-
-
-        return entityManager.find(Project.class, id);
+    public void save(Enterprise enterprise) {
+        entityManager.persist(enterprise);
+        entityManager.flush();
     }
 
-    public Enterprise findEnterpriseById(Long id) {
-
-        return entityManager.find(Enterprise.class, id);
+    public Project findProjectById(Long anId) {
+        return entityManager.find(Project.class, anId);
     }
 
+    public Enterprise findEnterpriseById(Long anId) {
+        return entityManager.find(Enterprise.class, anId);
+    }
+    @com.fasterxml.jackson.annotation.JsonIgnore
     public List<Project> findAllProjects() {
-        return this.entityManager.createQuery("SELECT p FROM Project p ORDER BY p.title", Project.class).getResultList();
+        String query = "SELECT p FROM Project p ORDER BY p.title" ;
+        TypedQuery<Project> queryObj = entityManager.createQuery(query,Project.class);
+        return queryObj.getResultList();
     }
 }
